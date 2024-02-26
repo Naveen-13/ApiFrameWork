@@ -27,5 +27,11 @@ public class TestData {
 		ds.setLocation(l);
 		return ds;
 	}
+	public String getDeletePayload(String placeID) {
+		return "{\r\n"
+				+ "\r\n"
+				+ "    \"place_id\":\""+placeID+"\"\r\n"
+				+ "}";
+	}
 
 }

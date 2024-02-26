@@ -10,6 +10,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class Utils {
@@ -29,9 +31,15 @@ public class Utils {
 	
 	public  String getGlobalData(String key) throws IOException {
 		Properties p = new Properties();
-		FileInputStream fs = new FileInputStream("D:\\NAVEEN\\Selenium\\ApiFrameWork\\src\\test\\java\\resources\\global.properties");
+		FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\global.properties");
 		p.load(fs);
 		return p.getProperty(key);
+	}
+	public String JsonPathData(Response response, String key) {
+		String reString = response.asString();
+		JsonPath jsonPath = new JsonPath(reString);
+		return jsonPath.get(key).toString();
+		
 	}
 
 }
